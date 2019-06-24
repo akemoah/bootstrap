@@ -1,6 +1,6 @@
 # bootstrap.yml
 ---
-- hosts: all
+- hosts: dockerhost
   gather_facts: no
   become: yes
   vars:
