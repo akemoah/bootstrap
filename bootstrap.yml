@@ -14,7 +14,8 @@
       user:
         name: "{{ username }}"
         password: "{{ pawword }}"
-        groups: sudo, wheel
+        groups: sudo
+        #, wheel
         append: yes
     - name: deploy my main ssh public key to my main user
       authorized_key:
