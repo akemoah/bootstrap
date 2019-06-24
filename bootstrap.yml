@@ -12,11 +12,11 @@
     - raw: test -e /usr/bin/python || ( [ $(command -v yum) ] && yum install -y python )
     - name: create my main user
       user:
-        name: {{ username }}
-        password: {{ pawword }}
+        name: "{{ username }}"
+        password: "{{ pawword }}"
         groups: sudo, wheel
         append: yes
     - name: deploy my main ssh public key to my main user
       authorized_key:
-        user: {{ username }}
+        user: "{{ username }}"
         key: "{{ lookup('file', {{ pub_key }}) }}"
