@@ -6,7 +6,7 @@
   vars:
     username: ansible
     pawword: ansible
-    pub_key: '/home/vagrant/.ssh/id_rsa.pub'
+    pub_key: /home/vagrant/.ssh/id_rsa.pub
   tasks:
     - raw: test -e /usr/bin/python3 || ( [ $(command -v apt) ] && apt install -y python-minimal )
     - raw: test -e /usr/bin/python3 || ( [ $(command -v yum) ] && yum install -y python )
@@ -20,4 +20,4 @@
     - name: deploy my main ssh public key to my main user
       authorized_key:
         user: "{{ username }}"
-        key: "{{ lookup('file', {{ pub_key }}) }}"
+        key: "{{ lookup('file', '{{ pub_key }}') }}"
