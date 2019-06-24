@@ -1,0 +1,22 @@
+# bootstrap.yml
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    username: ansible
+    pawword: ansible
+    pub_key: '/home/vagrant/.ssh/id_rsa.pub'
+  tasks:
+    - raw: test -e /usr/bin/python || ( [ $(command -v apt) ] && apt install -y python-minimal )
+    - raw: test -e /usr/bin/python || ( [ $(command -v yum) ] && yum install -y python )
+    - name: create my main user
+      user:
+        name: {{ username }}
+        password: {{ pawword }}
+        groups: sudo, wheel
+        append: yes
+    - name: deploy my main ssh public key to my main user
+      authorized_key:
+        user: {{ username }}
+        key: "{{ lookup('file', {{ pub_key }}) }}"
